@@ -124,6 +124,10 @@
                                     <span class="material-symbols-outlined text-[20px]">edit</span>
                                     <span class="text-sm font-bold">Edit</span>
                                 </a>
+                                <a href="{{ route('recipes.destroy', $recipe->id) }}" class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-[#e6e0db] dark:border-[#3a2d20] rounded-lg hover:bg-gray-50 dark:hover:bg-[#2a2018] transition-colors">
+                                    <span class="material-symbols-outlined text-[20px]">Delete</span>
+                                    <span class="text-sm font-bold">Delete</span>
+                                </a>
                             @endif
                         </div>
                     </div>
