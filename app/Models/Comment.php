@@ -13,18 +13,18 @@ class Comment extends Model
     protected $table = 'comments';
     protected $fillable = [
         'content',
-        'id_recipe',
-        'id_user'
+        'recipe_id',
+        'user_id'
     ];
 
     public function user()
     {
-        return $this->BelongsTo(User::class, 'id_user');
+        return $this->BelongsTo(User::class, 'user_id');
     }
 
     public function recipe()
     {
-        return $this->belongsTo(Recipe::class, 'id_recipe');
+        return $this->belongsTo(Recipe::class, 'recipe_id');
     }
 
 }
