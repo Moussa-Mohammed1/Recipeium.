@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Category;
+use App\Models\Ingredient;
+use App\Models\Step;
 use Illuminate\Http\Request;
 use App\Models\Recipe;
 
@@ -11,7 +13,7 @@ class RecipeController extends Controller
 
     public function index()
     {
-        $recipes = Recipe::with('categories', 'users')
+        $recipes = Recipe::with('category', 'user')
             ->orderBy('created_at', 'desc')
             ->paginate(10);
         return view('recipes.recipes', compact('recipes'));
@@ -28,29 +30,51 @@ class RecipeController extends Controller
         $validated = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'required|string',
-            'image' => 'required|string|max:255',
-            'id_category' => 'required|exists:categories,id',
+            'user_id' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg',
+            'category_id' => 'required|exists:categories,id',
         ]);
 
+        $imagePath = $request->file('image')->store('uploads', 'public');
+        $validated['image'] = $imagePath;
         $recipe = Recipe::create($validated);
 
+        $quantities = $request->input('quantity', []);
+        $units = $request->input('unit', []);
+        $contents = $request->input('content', []);
+        
+        $ingredientsIds = [];
+        foreach($contents as $idx => $content){
+            $ingredient = Ingredient::create(['content' => $content]);
+            $ingredientsIds[$ingredient->id] = [
+                'quantity' => $quantities[$idx],
+                'unit' => $units[$idx]
+            ];
+        }
+        $recipe->ingredients()->attach($ingredientsIds);
+        foreach ($request->steps as $step => $content) {
+            Step::create([
+                'content' => $content,
+                'recipe_id' => $recipe->id,
+                'order' => $step + 1
+            ]);
+        }
 
-        return redirect()->route('recipes.recipes')
-            ->with('success', 'Recipe created successfully!');
+        return redirect()->route('recipes.index');
     }
 
     public function show(Recipe $recipe)
     {
-        $recipe->load('category', 'ingredients', 'steps', 'comments');
+        $recipe->load('category', 'ingredients', 'steps', 'comments', 'user');
         return view('recipes.show', compact('recipe'));
     }
 
     public function edit(Recipe $recipe)
     {
-
-        return view('recipes.edit', compact('recipe'));
+        $categories = Category::all();
+        $recipe->load('category', 'ingredients', 'steps', 'user');
+        return view('recipes.edit', compact('recipe', 'categories'));
     }
-
     
     public function update(Request $request, Recipe $recipe)
     {
