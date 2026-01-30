@@ -15,8 +15,8 @@ return new class extends Migration
             $table->id();
             $table->float('quantity');
             $table->string('unit');
-            $table->foreignId('id_recipe')->constrained('recipes')->cascadeOnDelete();
-            $table->foreignId('id_ingredient')->constrained('ingredients')->cascadeOnDelete();
+            $table->foreignId('recipe_id')->constrained('recipes')->cascadeOnDelete();
+            $table->foreignId('ingredient_id')->constrained('ingredients')->cascadeOnDelete();
             $table->timestamps();
         });
     }

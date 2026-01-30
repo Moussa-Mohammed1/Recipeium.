@@ -17,7 +17,8 @@ return new class extends Migration
             $table->text('description');
             $table->string('image');
             $table->boolean('top_day')->default(false);
-            $table->foreignId('id_category')->constrained('categories')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users');
+            $table->foreignId('category_id')->constrained('categories')->cascadeOnDelete();
             $table->timestamps();
         });
     }

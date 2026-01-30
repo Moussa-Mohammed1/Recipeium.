@@ -13,11 +13,10 @@ return new class extends Migration
     {
         Schema::create('comments', function (Blueprint $table) {
             $table->id();
-            $table->double('content');
-            $table->foreignId('id_recipe')->constrained('recipes')->cascadeOnDelete();
-            $table->foreignId('id_user')->constrained('users')->cascadeOnDelete();
+            $table->text('content');
+            $table->foreignId('recipe_id')->constrained('recipes')->cascadeOnDelete();
+            $table->foreignId('user_id')->constrained('users')->cascadeOnDelete();
             $table->timestamps();
-
         });
     }
 

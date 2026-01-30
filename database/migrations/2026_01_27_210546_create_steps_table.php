@@ -14,7 +14,8 @@ return new class extends Migration
         Schema::create('steps', function (Blueprint $table) {
             $table->id();
             $table->text('content');
-            $table->foreignId('id_recipe')->constrained('recipes')->cascadeOnDelete();
+            $table->integer('order');
+            $table->foreignId('recipe_id')->constrained('recipes')->cascadeOnDelete();
             $table->timestamps();
         });
     }
