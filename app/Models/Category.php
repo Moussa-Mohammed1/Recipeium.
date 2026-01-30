@@ -12,8 +12,7 @@ class Category extends Model
     protected $table = 'categories';
 
     protected $fillable = [
-        'title',
-        'image'
+        'title'
     ];
 
     public function recipe()
