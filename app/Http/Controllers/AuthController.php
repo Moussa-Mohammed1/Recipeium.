@@ -46,5 +46,10 @@ class AuthController extends Controller
         Auth::login($user);
         return redirect('/recipes');
     }
+    public function logout()
+    {
+        Auth::logout();
+        return view('login');
+    }
 
 }
