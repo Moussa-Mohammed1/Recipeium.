@@ -103,22 +103,36 @@
                 <!-- Search Bar Integrated in Hero -->
                 <div class="w-full max-w-2xl mt-4">
                     <form
-                        class="flex w-full items-center p-2 bg-white rounded-full shadow-2xl shadow-black/20 focus-within:ring-4 focus-within:ring-primary/30 transition-all">
+                        method="POST"
+                        action="/recipes/search"
+                        class="flex w-full items-center p-2 bg-white rounded-full shadow-2xl shadow-black/20 focus-within:ring-4 focus-within:ring-primary/30 transition-all gap-2">
+                        @csrf
                         <div class="pl-4 text-gray-400">
                             <span class="material-symbols-outlined">search</span>
                         </div>
                         <input
+                            name="recipe"
                             class="flex-1 border-none outline-none focus:ring-0 text-gray-800 placeholder-gray-400 bg-transparent h-12 px-4 text-base rounded-none"
-                            placeholder="Search recipes, ingredients, or chefs..." type="text" />
+                            placeholder="Search recipes, ingredients, or chefs..." type="text"
+                            value="{{ old('recipe', $searchTerm ?? '') }}" />
+                        <select name="category" class="h-12 px-4 rounded-lg border-2 border-gray-200 focus:border-primary focus:ring-0 text-gray-800 bg-white dark:bg-surface-dark text-base">
+                            <option value="">All Categories</option>
+                            @foreach($categories as $category)
+                                <option value="{{ $category->id }}" {{ (old('category', $selectedCategory ?? '') == $category->id) ? 'selected' : '' }}>
+                                    {{ $category->title }}
+                                </option>
+                            @endforeach
+                        </select>
                         <button
-                            class="bg-primary hover:bg-orange-600 text-white rounded-full size-12 flex items-center justify-center transition-colors"
-                            type="button">
+                            type="submit"
+                            class="bg-primary hover:bg-orange-600 text-white rounded-full size-12 flex items-center justify-center transition-colors">
                             <span class="material-symbols-outlined">arrow_forward</span>
                         </button>
                     </form>
                 </div>
             </div>
         </div>
+        
         <!-- Masonry Grid Content -->
         <section class="w-full max-w-[1280px] px-4 md:px-8 py-12">
             <div class="flex items-center justify-between mb-8">
@@ -126,6 +140,13 @@
                 <a class="text-primary font-bold text-sm hover:underline flex items-center gap-1" href="#">
                     View All <span class="material-symbols-outlined text-[16px]">arrow_forward</span>
                 </a>
+            </div>
+            <!-- Stylish total recipes count -->
+            <div class="flex items-center justify-center mb-8">
+                <span class="inline-flex items-center gap-2 px-6 py-2 rounded-full bg-primary/10 dark:bg-primary/20 text-primary dark:text-orange-300 font-semibold text-lg shadow-soft">
+                    <span class="material-symbols-outlined text-[22px]">restaurant_menu</span>
+                    {{ $recipes->count() }} Published Recipes
+                </span>
             </div>
             @if ($recipes->count())
                 <!-- Masonry Layout using Columns -->
