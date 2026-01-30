@@ -62,21 +62,14 @@ class CommentController extends Controller
             'content' => 'required|string',
         ]);
         $comment->update($validated);
-        if ($request->wantsJson() || $request->ajax()) {
-            return response()->json(['success' => true, 'content' => $comment->content]);
-        }
         return redirect()->back();
     }
 
     /**
      * Remove the specified resource from storage.
      */
-    public function destroy(string $id)
+    public function destroy(Comment $comment)
     {
-        $comment = \App\Models\Comment::findOrFail($id);
-        if (auth()->id() !== $comment->id_user) {
-            abort(403);
-        }
         $comment->delete();
         return redirect()->back();
     }
