@@ -12,11 +12,12 @@ class Step extends Model
     protected $table = 'steps';
     protected $fillable = [
         'content',
-        'id_recipe'
+        'recipe_id',
+        'order'
     ];
 
     public function recipe()
     {
-        return $this->belongsTo(Recipe::class, 'id_recipe');
+        return $this->belongsTo(Recipe::class, 'recipe_id');
     }
 }
