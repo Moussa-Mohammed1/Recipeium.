@@ -202,29 +202,6 @@
                         i++;
                     }
                     
-                    let stepsContainer = document.querySelector('.relative.pl-0.md\\:pl-4.space-y-12');
-                    let j = 1;
-                    function plusStep() {
-                        let newStep = document.createElement('div');
-                        newStep.className = 'relative Steps z-10 grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6';
-                        newStep.innerHTML = `
-                            <div class=\"hidden md:flex size-10 rounded-full bg-primary text-white font-bold items-center justify-center shrink-0 shadow-md\">${j+1}</div>
-                            <div class=\"flex flex-col gap-4\">
-                                <div class=\"md:hidden flex items-center gap-3 mb-2\">
-                                    <div class=\"flex size-8 rounded-full bg-primary text-white font-bold items-center justify-center shrink-0\">${j+1}</div>
-                                    <span class=\"font-bold text-lg\">Step ${j+1}</span>
-                                </div>
-                                <textarea name=\"steps[]\" class=\"w-full min-h-[120px] p-4 rounded-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark focus:border-primary outline-none resize-none\" placeholder=\"Describe this step in detail...\"></textarea>
-                                <div class=\"flex items-center gap-4\">
-                                    <button type=\"button\" onclick=\"this.closest('.Steps').remove()\" class=\"flex items-center gap-2 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark hover:text-red-500 transition-colors ml-auto\">
-                                        <span class=\"material-symbols-outlined\">delete</span> Remove step
-                                    </button>
-                                </div>
-                            </div>
-                        `;
-                        stepsContainer.insertBefore(newStep, stepsContainer.lastElementChild);
-                        j++;
-                    }
                 </script>
             </section>
             <!-- Method / Steps Section -->
@@ -260,13 +237,10 @@
                     </div>
                     
                     <div class="relative z-10 grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6 pt-4">
-                        <div
-                            class="hidden md:flex size-10 rounded-full bg-background-light dark:bg-background-dark border-2 border-dashed border-primary/50 text-primary font-bold items-center justify-center shrink-0">
-                            <span class="material-symbols-outlined text-sm">add</span>
-                        </div>
+                        
                         <button onclick="plusStep();" type="button"
                             class="flex items-center justify-center md:justify-start gap-2 text-primary font-bold hover:bg-primary/5 px-6 py-3 rounded-lg transition-colors border-2 border-dashed border-primary/30 hover:border-primary">
-                            Add Next Step
+                            <span class="material-symbols-outlined text-sm">add</span>Add Next Step
                         </button>
                     </div>
                 </div>
@@ -287,6 +261,31 @@
                         <span>Publish Recipe</span>
                         <span class="material-symbols-outlined">arrow_forward</span>
                     </button>
+                    <script>
+                        let stepsContainer = document.querySelector('.relative.pl-0.md\\:pl-4.space-y-12');
+                    let j = 1;
+                    function plusStep() {
+                        let newStep = document.createElement('div');
+                        newStep.className = 'relative Steps z-10 grid grid-cols-1 md:grid-cols-[auto_1fr] gap-6';
+                        newStep.innerHTML = `
+                            <div class="hidden md:flex size-10 rounded-full bg-primary text-white font-bold items-center justify-center shrink-0 shadow-md">${j+1}</div>
+                            <div class="flex flex-col gap-4">
+                                <div class="md:hidden flex items-center gap-3 mb-2">
+                                    <div class="flex size-8 rounded-full bg-primary text-white font-bold items-center justify-center shrink-0">${j+1}</div>
+                                    <span class="font-bold text-lg">Step ${j+1}</span>
+                                </div>
+                                <textarea name="steps[]" class="w-full min-h-[120px] p-4 rounded-lg bg-background-light dark:bg-background-dark border border-border-light dark:border-border-dark focus:border-primary outline-none resize-none" placeholder="Describe this step in detail..."></textarea>
+                                <div class="flex items-center gap-4">
+                                    <button type="button" onclick="this.closest('.Steps').remove()" class="flex items-center gap-2 text-sm font-medium text-text-secondary-light dark:text-text-secondary-dark hover:text-red-500 transition-colors ml-auto">
+                                        <span class="material-symbols-outlined">delete</span> Remove step
+                                    </button>
+                                </div>
+                            </div>
+                        `;
+                        stepsContainer.insertBefore(newStep, stepsContainer.lastElementChild);
+                        j++;
+                    }
+                    </script>
                 </div>
             </div>
         </div>
