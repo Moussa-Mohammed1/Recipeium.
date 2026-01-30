@@ -53,32 +53,27 @@
 </head>
 
 <body class="bg-background-light dark:bg-background-dark text-[#181411] dark:text-white font-display">
-    <div class="relative flex h-auto min-h-screen w-full flex-col overflow-x-hidden">
-        <!-- Navigation -->
+    <div class="relative flex min-h-screen w-full flex-col overflow-x-hidden">
         @include('layouts.header')
+
         <main class="flex-1">
-            <!-- Hero Section -->
             <div class="w-full relative h-[50vh] min-h-[400px]">
                 <div class="absolute inset-0 bg-cover bg-center"
-                    data-alt="Close up of spicy basil chicken dish with vibrant colors"
                     style='background-image: url("{{ asset('storage/' . $recipe->image) }}");'>
                 </div>
-                <div
-                    class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end pb-12 px-6 md:px-20 lg:px-40">
+                <div class="absolute inset-0 bg-gradient-to-t from-black/80 via-black/30 to-transparent flex flex-col justify-end pb-12 px-6 md:px-20 lg:px-40">
                     <div class="max-w-[960px] mx-auto w-full">
                         <div class="flex flex-wrap gap-3 mb-4">
-                            <span
-                                class="px-3 py-1 bg-primary/90 text-white text-xs font-bold uppercase tracking-wider rounded-full backdrop-blur-sm">
-                                {{ $recipe->category->title }}</span>
+                            <span class="px-3 py-1 bg-primary text-white text-xs font-bold uppercase tracking-wider rounded-full backdrop-blur-sm">
+                                {{ $recipe->category->title }}
+                            </span>
                         </div>
-                        <h1
-                            class="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 drop-shadow-md">
+                        <h1 class="text-white text-4xl md:text-5xl lg:text-6xl font-bold leading-tight mb-4 drop-shadow-md">
                             {{ $recipe->title }}
                         </h1>
                         <div class="flex flex-wrap items-center gap-6 text-white/90">
                             <div class="flex items-center gap-2">
-                                <img alt="Chef Aria" class="w-8 h-8 rounded-full border-2 border-primary object-cover"
-                                    data-alt="Portrait of Chef Aria"
+                                <img class="w-8 h-8 rounded-full border-2 border-primary object-cover"
                                     src="{{ $recipe->user->image ?? 'https://i.pinimg.com/736x/cc/9a/21/cc9a217851caac8b48adb7917e4c890c.jpg' }}" />
                                 <span class="text-sm font-medium">By {{ $recipe->user->name }}</span>
                             </div>
@@ -93,136 +88,92 @@
                     </div>
                 </div>
             </div>
-            <!-- Content Container -->
-            <div class="px-4 md:px-10 lg:px-40 -mt-8 relative z-10 pb-20">
-                <div
-                    class="max-w-[960px] mx-auto bg-white dark:bg-[#1a120b] rounded-xl shadow-xl border border-[#e6e0db] dark:border-[#3a2d20] overflow-hidden">
-                    <!-- Utility Bar & Meta Info -->
-                    <div
-                        class="p-6 md:p-8 border-b border-[#f0ebe8] dark:border-[#3a2d20] flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
+
+            <div class="px-4 md:px-10 lg:px-40 -mt-12 relative z-10 pb-20">
+                <div class="max-w-[960px] mx-auto bg-white dark:bg-[#1a120b] rounded-xl shadow-xl border border-[#e6e0db] dark:border-[#3a2d20] overflow-hidden">
+                    
+                    <div class="p-6 md:p-8 border-b border-[#f0ebe8] dark:border-[#3a2d20] flex flex-col md:flex-row gap-6 justify-between items-start md:items-center">
                         <div class="flex flex-wrap gap-4 md:gap-8">
-                            <div class="flex items-center gap-2 text-[#181411] dark:text-gray-200">
+                            <div class="flex items-center gap-2">
                                 <div class="p-2 bg-primary/10 rounded-full text-primary">
                                     <span class="material-symbols-outlined text-[20px]">schedule</span>
                                 </div>
                                 <div class="flex flex-col">
-                                    <span class="text-xs text-[#8a7560] dark:text-gray-400 font-medium uppercase">Prep
-                                        Time</span>
-                                    <span class="font-bold">15 min</span>
+                                    <span class="text-xs text-[#8a7560] uppercase">Prep</span>
+                                    <span class="font-bold text-sm">15 min</span>
                                 </div>
                             </div>
-                            <div class="flex items-center gap-2 text-[#181411] dark:text-gray-200">
+                            <div class="flex items-center gap-2">
                                 <div class="p-2 bg-primary/10 rounded-full text-primary">
                                     <span class="material-symbols-outlined text-[20px]">timer</span>
                                 </div>
                                 <div class="flex flex-col">
-                                    <span class="text-xs text-[#8a7560] dark:text-gray-400 font-medium uppercase">Cook
-                                        Time</span>
-                                    <span class="font-bold">10 min</span>
-                                </div>
-                            </div>
-                            <div class="flex items-center gap-2 text-[#181411] dark:text-gray-200">
-                                <div class="p-2 bg-primary/10 rounded-full text-primary">
-                                    <span class="material-symbols-outlined text-[20px]">group</span>
-                                </div>
-                                <div class="flex flex-col">
-                                    <span
-                                        class="text-xs text-[#8a7560] dark:text-gray-400 font-medium uppercase">Servings</span>
-                                    <span class="font-bold">2 people</span>
+                                    <span class="text-xs text-[#8a7560] uppercase">Cook</span>
+                                    <span class="font-bold text-sm">10 min</span>
                                 </div>
                             </div>
                         </div>
+
                         <div class="flex gap-3 w-full md:w-auto">
-                            <button
-                                class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-[#e6e0db] dark:border-[#3a2d20] rounded-lg hover:bg-[#f8f7f5] dark:hover:bg-[#2a2018] text-sm font-bold text-[#181411] dark:text-white transition-colors group">
-                                <span
-                                    class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">favorite</span>
-                                <span>Save</span>
-                            </button>
-                            <button
-                                class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-[#e6e0db] dark:border-[#3a2d20] rounded-lg hover:bg-[#f8f7f5] dark:hover:bg-[#2a2018] text-sm font-bold text-[#181411] dark:text-white transition-colors group">
-                                <span
-                                    class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">share</span>
-                                <span>Share</span>
+                            <button class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-[#e6e0db] dark:border-[#3a2d20] rounded-lg hover:bg-gray-50 dark:hover:bg-[#2a2018] transition-colors">
+                                <span class="material-symbols-outlined text-[20px]">favorite</span>
+                                <span class="text-sm font-bold">Save</span>
                             </button>
                             @if (auth()->id() === $recipe->user_id)
-                                <a href="{{ route('recipes.edit', $recipe->id) }}"
-                                    class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-[#e6e0db] dark:border-[#3a2d20] rounded-lg hover:bg-[#f8f7f5] dark:hover:bg-[#2a2018] text-sm font-bold text-[#181411] dark:text-white transition-colors group">
-                                    <span
-                                        class="material-symbols-outlined text-[20px] group-hover:text-primary transition-colors">edit</span>
-                                    <span>edit</span>
+                                <a href="{{ route('recipes.edit', $recipe->id) }}" class="flex-1 md:flex-none flex items-center justify-center gap-2 px-4 py-2 border border-[#e6e0db] dark:border-[#3a2d20] rounded-lg hover:bg-gray-50 dark:hover:bg-[#2a2018] transition-colors">
+                                    <span class="material-symbols-outlined text-[20px]">edit</span>
+                                    <span class="text-sm font-bold">Edit</span>
                                 </a>
                             @endif
-
                         </div>
                     </div>
-                    <!-- Intro Text -->
-                    <div class="p-6 md:p-8 md:pb-0">
-                        <p class="text-lg leading-relaxed text-[#594a42] dark:text-gray-300">
-                            {{ $recipe->description }}
-                        </p>
-                    </div>
+
                     <div class="flex flex-col lg:flex-row">
-                        <!-- Left Column: Ingredients -->
-                        <div
-                            class="w-full lg:w-1/3 p-6 md:p-8 bg-[#fdfbf9] dark:bg-[#1f1610] border-r border-[#f0ebe8] dark:border-[#3a2d20]">
-                            <h3 class="text-2xl font-bold text-[#181411] dark:text-white mb-6 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-primary">shopping_basket</span>
-                                Ingredients
+                        <div class="w-full lg:w-1/3 p-6 md:p-8 bg-[#fdfbf9] dark:bg-[#1f1610] border-r border-[#f0ebe8] dark:border-[#3a2d20]">
+                            <h3 class="text-xl font-bold mb-6 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">shopping_basket</span> Ingredients
                             </h3>
                             <div class="space-y-4">
-
                                 @foreach ($recipe->ingredients as $ingredient)
-                                    <?php    //dd($ingredient)?>
                                     <label class="flex items-start gap-3 cursor-pointer group">
-                                        <div class="relative flex items-center">
-                                            <input class="peer sr-only" type="checkbox" />
-                                            <div
-                                                class="w-5 h-5 border-2 border-[#d0c6be] dark:border-[#5a483a] rounded bg-white dark:bg-[#2a2018] transition-all peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center">
-                                                <span
-                                                    class="material-symbols-outlined text-white text-[16px] opacity-0 transition-opacity check-icon">check</span>
+                                        <div class="relative flex items-center mt-1">
+                                            <input type="checkbox" class="peer sr-only" />
+                                            <div class="w-5 h-5 border-2 border-[#d0c6be] dark:border-[#5a483a] rounded peer-checked:bg-primary peer-checked:border-primary flex items-center justify-center transition-all">
+                                                <span class="material-symbols-outlined text-white text-[14px] opacity-0 peer-checked:opacity-100">check</span>
                                             </div>
                                         </div>
-                                        <span
-                                            class="text-[#181411] dark:text-gray-200 group-hover:text-primary transition-colors select-none leading-tight">{{ $ingredient->pivot->quantity}}
-                                            {{ $ingredient->pivot->unit }} <span
-                                                class="font-bold">{{ $ingredient->content }}</span>
+                                        <span class="text-sm leading-tight text-[#181411] dark:text-gray-200 group-hover:text-primary">
+                                            {{ $ingredient->pivot->quantity }} {{ $ingredient->pivot->unit }} <strong>{{ $ingredient->content }}</strong>
                                         </span>
                                     </label>
                                 @endforeach
                             </div>
                         </div>
-                        <!-- Right Column: Instructions -->
+
                         <div class="w-full lg:w-2/3 p-6 md:p-8">
-                            <h3 class="text-2xl font-bold text-[#181411] dark:text-white mb-8 flex items-center gap-2">
-                                <span class="material-symbols-outlined text-primary">menu_book</span>
-                                Instructions
+                            <h3 class="text-xl font-bold mb-8 flex items-center gap-2">
+                                <span class="material-symbols-outlined text-primary">menu_book</span> Instructions
                             </h3>
-                            @foreach ($recipe->steps as $step)
-
-                                <div class="flex flex-col gap-6">
-
-                                    <div class="flex gap-4 md:gap-6 group">
-                                        <div class="flex-shrink-0 flex flex-col items-center">
-                                            <div
-                                                class="w-10 h-10 md:w-12 md:h-12 rounded-full bg-primary text-white flex items-center justify-center text-xl font-bold shadow-md shadow-primary/30">
+                            <div class="space-y-8">
+                                @foreach ($recipe->steps as $step)
+                                    <div class="flex gap-4 group">
+                                        <div class="flex flex-col items-center">
+                                            <div class="w-10 h-10 shrink-0 rounded-full bg-primary text-white flex items-center justify-center text-lg font-bold shadow-lg shadow-primary/20">
                                                 {{ $step->order }}
                                             </div>
-                                            <div class="w-0.5 h-full bg-[#e6e0db] dark:bg-[#3a2d20] my-2 group-last:hidden">
-                                            </div>
+                                            @if(!$loop->last)
+                                                <div class="w-0.5 flex-1 bg-[#e6e0db] dark:bg-[#3a2d20] my-2"></div>
+                                            @endif
                                         </div>
-                                        <div
-                                            class="bg-white dark:bg-[#2a2018] border border-[#e6e0db] dark:border-[#3a2d20] rounded-xl p-5 flex-1 hover:border-primary/50 transition-colors shadow-sm">
-
-                                            <p class="text-[#594a42] dark:text-gray-300 leading-relaxed">
-                                                {{ $step->content }}
-                                            </p>
+                                        <div class="bg-white dark:bg-[#2a2018] border border-[#e6e0db] dark:border-[#3a2d20] rounded-xl p-5 flex-1 shadow-sm">
+                                            <p class="text-[#594a42] dark:text-gray-300 leading-relaxed">{{ $step->content }}</p>
                                         </div>
                                     </div>
-                            @endforeach
+                                @endforeach
                             </div>
                         </div>
                     </div>
+
                     @auth
                         <div class="p-6 md:p-8 border-t border-[#f0ebe8] dark:border-[#3a2d20]">
                             <form action="/comments" method="POST" class="flex flex-col gap-4">
@@ -297,8 +248,7 @@
                                                     <span class="material-symbols-outlined text-sm">edit_note</span> Edit
                                                 </button>
 
-                                                <form action="{{ route('comments.destroy', $comment->id) }}" method="POST"
-                                                    onsubmit="return confirm('Delete this comment?')">
+                                                <form action="{{ route('comments.destroy', $comment->id) }}" method="POST">
                                                     @csrf
                                                     @method('DELETE')
                                                     <button type="submit"
@@ -356,18 +306,15 @@
                     </script>
                 </div>
             </div>
-    </div>
-    <!-- Footer -->
-    <footer class="bg-white dark:bg-[#1a120b] border-t border-[#e6e0db] dark:border-[#3a2d20] py-10 px-10 text-center">
-        <div class="flex items-center justify-center gap-2 mb-4 text-[#181411] dark:text-white">
-            <div class="size-6 text-primary">
-                <span class="material-symbols-outlined text-2xl">skillet</span>
+        </main>
+
+        <footer class="bg-white dark:bg-[#1a120b] border-t border-[#e6e0db] dark:border-[#3a2d20] py-10 text-center">
+            <div class="flex items-center justify-center gap-2 mb-4">
+                <span class="material-symbols-outlined text-primary text-2xl">skillet</span>
+                <span class="font-bold text-lg">Recipeium</span>
             </div>
-            <span class="font-bold text-lg">Recipeium</span>
-        </div>
-        <p class="text-[#8a7560] dark:text-gray-500 text-sm">© 2023 Recipeium. All rights reserved.</p>
-    </footer>
-    </main>
+            <p class="text-[#8a7560] text-sm">© 2026 Recipeium. All rights reserved.</p>
+        </footer>
     </div>
 </body>
 
