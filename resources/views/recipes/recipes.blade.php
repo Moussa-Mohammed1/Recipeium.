@@ -34,6 +34,9 @@
                         "background-dark": "#1a1510",
                         "surface-light": "#ffffff",
                         "surface-dark": "#2d241c",
+                        'recipe-light': '#F9F7F2', // Warm paper/cream
+                        'recipe-dark': '#0F0905',
+                          // Deep espresso
                     },
                     fontFamily: {
                         "display": ["Plus Jakarta Sans", "sans-serif"],
@@ -73,22 +76,23 @@
 </head>
 
 <body
-    class="bg-background-light dark:bg-background-dark text-[#181411] dark:text-[#f5f2f0] transition-colors duration-300">
-    
+    class="bg-recipe-light dark:bg-background-dark text-[#181411] dark:text-[#f5f2f0] transition-colors duration-300">
+
     @include('layouts.header')
     <!-- Main Content Wrapper -->
+     
     <main class="w-full flex flex-col items-center">
         <!-- Hero Section -->
         <div class="w-full relative h-[500px] md:h-[600px] overflow-hidden flex items-center justify-center">
             <!-- Background Image with Overlay -->
-            <!-- <div class="absolute inset-0 bg-cover bg-center z-0"
+            <div class="absolute inset-0 bg-cover bg-center z-0"
                 data-alt="Top down view of a rustic table filled with fresh colorful ingredients and dishes"
-                style="background-image: url('https://lh3.googleusercontent.com/aida-public/AB6AXuDJj0HbaF_IKop8eS4mWoEicKfAjHdT82rxXltONuOjAbsUr1hOK3nyaAdSv9XNl713jADa08YbxyePctSeWOd4KmUqzIUlMuoKGeowYwB8o5Y_ECWVFEeQ5vmYx4_rOv18LZ-MXvBcol3f4tRu5GtOUszS3qm88r-WJ7Lc6tpZ1nKd0sQY6dym03AvuxpOq9ojNoeYP1YgDDzohMQil7V3lr8I-MKflKOdY7bbz7tCF7vhSu_oyzj2xRlWyaus2qgIhcXvfbz_o4Qc');">
-            </div> -->
+                style="background-image: url('https://i.pinimg.com/1200x/e2/27/6c/e2276c48e1b36ba7dc91004987d908cc.jpg');">
+            </div>
             <div class="absolute inset-0 bg-gradient-to-b from-black/40 via-black/20 to-black/60 z-10"></div>
-            
+
             <div class="relative z-20 text-center px-4 max-w-4xl flex flex-col items-center gap-6 mt-10">
-               
+
                 <h1 class="text-5xl md:text-7xl font-black text-white leading-tight tracking-tight drop-shadow-sm">
                     Cook. Share. <span class="text-primary">Inspire.</span>
                 </h1>
@@ -124,60 +128,65 @@
                 </a>
             </div>
             @if ($recipes->count())
-            <!-- Masonry Layout using Columns -->
-            <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
-            @foreach($recipes as $recipe)
-                <div onclick="window.location='{{ route('recipes.show', $recipe->id) }}'"
-                    class="break-inside-avoid relative group rounded-2xl bg-white dark:bg-surface-dark shadow-soft hover:shadow-hover transition-all duration-300 cursor-pointer overflow-hidden ring-1 ring-black/5 dark:ring-white/5">
-                    <div class="relative w-full overflow-hidden">
-                        <img class="w-full h-[200px] object-cover group-hover:scale-105 transition-transform duration-500"
-                            data-alt="Healthy bowl with avocado, greens, eggs and seeds"
-                            src="{{ asset('storage/'.$recipe->image) }}" />
-                        <div
-                            class="absolute top-3 left-3 bg-white/90 dark:bg-black/80 backdrop-blur-sm px-2.5 py-1 rounded-md text-xs font-bold text-[#181411] dark:text-white uppercase tracking-wide">
-                            {{ $recipe->category->title }}
-                        </div>
-                       
-                    </div>
-                    <div class="p-4">
-                        <h3
-                            class="text-lg font-bold text-[#181411] dark:text-white mb-1 leading-snug group-hover:text-primary transition-colors">
-                            {{ $recipe->title }}
-                        </h3>
-                       
-                        <div
-                            class="flex items-center justify-between border-t border-gray-100 dark:border-white/5 pt-3 mt-2">
-                            <div class="flex items-center gap-2">
-                                <img class="size-6 rounded-full object-cover" data-alt="Portrait of Sarah Bakes"
-                                    src="{{ $recipe->user->image ?? 'https://i.pinimg.com/736x/cc/9a/21/cc9a217851caac8b48adb7917e4c890c.jpg' }}" />
-                                <span class="text-xs font-medium text-gray-500 dark:text-gray-400">{{ $recipe->user->name ?? 'nn' }}</span>
+                <!-- Masonry Layout using Columns -->
+                <div class="columns-1 sm:columns-2 lg:columns-3 xl:columns-4 gap-6 space-y-6">
+                    @foreach($recipes as $recipe)
+                        <div onclick="window.location='{{ route('recipes.show', $recipe->id) }}'"
+                            class="break-inside-avoid relative group rounded-2xl bg-white dark:bg-surface-dark shadow-soft hover:shadow-hover transition-all duration-300 cursor-pointer overflow-hidden ring-1 ring-black/5 dark:ring-white/5">
+                            <div class="relative w-full overflow-hidden">
+                                <img class="w-full h-[200px] object-cover group-hover:scale-105 transition-transform duration-500"
+                                    data-alt="Healthy bowl with avocado, greens, eggs and seeds"
+                                    src="{{ asset('storage/' . $recipe->image) }}" />
+                                <div
+                                    class="absolute top-3 left-3 bg-white/90 dark:bg-black/80 backdrop-blur-sm px-2.5 py-1 rounded-md text-xs font-bold text-[#181411] dark:text-white uppercase tracking-wide">
+                                    {{ $recipe->category->title }}
+                                </div>
+
                             </div>
-                            <div class="flex items-center gap-1 text-gray-400 text-xs">
-                                <span class="material-symbols-outlined text-[14px]">schedule</span>
-                                {{ $recipe->created_at->diffForHumans()}}
+                            <div class="p-4">
+                                <h3
+                                    class="text-lg font-bold text-[#181411] dark:text-white mb-1 leading-snug group-hover:text-primary transition-colors">
+                                    {{ $recipe->title }}
+                                </h3>
+
+                                <div
+                                    class="flex items-center justify-between border-t border-gray-100 dark:border-white/5 pt-3 mt-2">
+                                    <div class="flex items-center gap-2">
+                                        <img class="size-6 rounded-full object-cover" data-alt="Portrait of Sarah Bakes"
+                                            src="{{ $recipe->user->image ?? 'https://i.pinimg.com/736x/cc/9a/21/cc9a217851caac8b48adb7917e4c890c.jpg' }}" />
+                                        <span
+                                            class="text-xs font-medium text-gray-500 dark:text-gray-400">{{ $recipe->user->name ?? 'nn' }}</span>
+                                    </div>
+                                    <div class="flex items-center gap-1 text-gray-400 text-xs">
+                                        <span class="material-symbols-outlined text-[14px]">schedule</span>
+                                        {{ $recipe->created_at->diffForHumans()}}
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                    </div>
+                    @endforeach
                 </div>
-                @endforeach
-            </div>
             @else
-            <div class="flex flex-col h-full items-center justify-center">
+                <div class="flex flex-col h-full items-center justify-center">
                     <div class="flex flex-col flex-1 items-center justify-center w-full">
                         <div class="mb-6 drop-shadow-xl">
-                            <span class="material-symbols-outlined text-[80px] text-primary/30 dark:text-primary/40">restaurant</span>
+                            <span
+                                class="material-symbols-outlined text-[80px] text-primary/30 dark:text-primary/40">restaurant</span>
                         </div>
-                        <h3 class="text-3xl font-extrabold text-gray-800 dark:text-white mb-3 tracking-tight text-center">No recipes yet!</h3>
-                        <p class="text-lg text-gray-500 dark:text-gray-400 mb-8 text-center max-w-md">It looks a little empty here.<br>Be the first to inspire others by sharing your favorite dish!</p>
+                        <h3 class="text-3xl font-extrabold text-gray-800 dark:text-white mb-3 tracking-tight text-center">No
+                            recipes yet!</h3>
+                        <p class="text-lg text-gray-500 dark:text-gray-400 mb-8 text-center max-w-md">It looks a little
+                            empty here.<br>Be the first to inspire others by sharing your favorite dish!</p>
                     </div>
                     <div class="w-full flex justify-center mt-auto pb-2">
-                        <a href="/recipes/create" class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-orange-400 text-white font-extrabold shadow-2xl hover:from-orange-500 hover:to-primary transition-all text-xl focus:outline-none focus:ring-4 focus:ring-primary/30">
+                        <a href="/recipes/create"
+                            class="inline-flex items-center gap-2 px-8 py-4 rounded-full bg-gradient-to-r from-primary to-orange-400 text-white font-extrabold shadow-2xl hover:from-orange-500 hover:to-primary transition-all text-xl focus:outline-none focus:ring-4 focus:ring-primary/30">
                             <span class="material-symbols-outlined text-[28px]">add_circle</span>
                             Start by adding one
                         </a>
                     </div>
                 </div>
-                @endif
+            @endif
         </section>
         <!-- Newsletter Section -->
         <section class="w-full bg-[#fcece0] dark:bg-[#33261d] py-16 px-4">
